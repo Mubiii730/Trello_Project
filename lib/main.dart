@@ -94,6 +94,8 @@ class _BoardScreenState extends State<BoardScreen> {
         children: [
           Container(
             // color: Colors.white,
+            width: 200,
+            height: MediaQuery.sizeOf(context).height,
             child: Column(
               children: [
                 Row(
@@ -118,6 +120,7 @@ class _BoardScreenState extends State<BoardScreen> {
                       size: 20,
                     ),
                     const Text(' Getting started'),
+                    const SizedBox(width: 38),
                     IconButton(
                         onPressed: () {},
                         icon: const Icon(Icons.add),
@@ -139,7 +142,7 @@ class _BoardScreenState extends State<BoardScreen> {
                   key: ObjectKey(textItem),
                   decoration: const BoxDecoration(color: Colors.white),
                   child: Container(
-                    width: MediaQuery.sizeOf(context).width / 2,
+                    width: MediaQuery.sizeOf(context).width / 4,
                     height: MediaQuery.sizeOf(context).height / 10,
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
