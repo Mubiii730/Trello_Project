@@ -142,8 +142,9 @@ class _BoardScreenState extends State<BoardScreen> {
                   key: ObjectKey(textItem),
                   decoration: const BoxDecoration(color: Colors.white),
                   child: Container(
-                    width: MediaQuery.sizeOf(context).width / 4,
-                    height: MediaQuery.sizeOf(context).height / 10,
+                    
+                   // width: MediaQuery.sizeOf(context).width / 4,
+                    ///height: MediaQuery.sizeOf(context).height / 10,
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -151,32 +152,34 @@ class _BoardScreenState extends State<BoardScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            textItem.isEditing
-                                ? Expanded(
-                                    child: TextField(
-                                      controller: textController,
-                                      decoration: const InputDecoration(
-                                        labelText: 'Enter text',
+                            Expanded(
+                              child: textItem.isEditing
+                                  ? Expanded(
+                                      child: TextField(
+                                        controller: textController,
+                                        decoration: const InputDecoration(
+                                          labelText: 'Enter text',
+                                        ),
+                                        onSubmitted: (value) {
+                                          setState(() {
+                                            textItem.s = value;
+                                            textItem.isEditing = false;
+                                          });
+                                        },
                                       ),
-                                      onSubmitted: (value) {
+                                    )
+                                  : GestureDetector(
+                                      onTap: () {
                                         setState(() {
-                                          textItem.s = value;
-                                          textItem.isEditing = false;
+                                          textItem.isEditing = true;
                                         });
                                       },
+                                      child: Text(
+                                        textItem.s,
+                                        style: const TextStyle(fontWeight: FontWeight.bold),
+                                      ),
                                     ),
-                                  )
-                                : GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        textItem.isEditing = true;
-                                      });
-                                    },
-                                    child: Text(
-                                      textItem.s,
-                                      style: const TextStyle(fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
+                            ),
                             PopupMenuButton<int>(
                               icon: const Icon(Icons.more_vert),
                               onSelected: (index) {
